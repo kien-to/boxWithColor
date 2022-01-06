@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500|Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+
+    <title>30 Days Of React App</title>
+    <style> 
+      /* == General style === */
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+        line-height: 1.5;
+        font-family: 'Montserrat';
+        font-weight: 300;
+        color: black;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 50px;
+        margin-top: 50px;
+      }
+
+      .box {
+        text-align: center;
+        padding: 30px;
+      }
+
+
+    </style>
+    
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+            // const Box = ({boxEven}) => {
+            //   const boxEven = boxes.filter((box) => box % 2 == 0)
+            //   const boxOdd = boxes.filter((box) => box % 2 != 0)
+            //   return (
+            //   <li>
+            //       {boxEven}
+            //   </li>
+            // )}
+
+            var boxes = [];
+            for (var i = 0; i <= 31; i ++ ){
+                 boxes.push(i);
+            }
+
+            const isPrime = (box) => {
+              if (box == 0 || box ==1)
+                return false
+              var did = Math.sqrt(box);
+              for(let num = 2; num <= Math.sqrt(box); num++){
+                if (box % num == 0)
+                  return false
+              }
+              return true
+            }
+
+            const Box = ({box}) => {
+            if (isPrime(box)) {
+              return (
+                <button style = {{backgroundColor: 'cyan', width: '100px', height: '100px'}}>
+                    {box}
+                </button>
+              )
+            }
+            else if (box %2 == 0){ 
+              return (
+                <button style = {{backgroundColor: 'green', width: '100px', height: '100px'}}>
+                    {box}
+                </button>
+              )
+            } else {
+                return (
+                  <button style = {{backgroundColor: 'red', width: '100px', height: '100px'}}>
+                      {box}
+                  </button>
+                )
+            }
+          }
+
+            // Skills Component
+            const Boxes = ({ boxes }) => {
+              const boxList = boxes.map((box) => <Box key = {box} box = {box}/>)
+              return <div>{boxList}</div>
+            }
+
+            const App = () => {
+            return (
+                <div className='container'>
+                <div>
+                    <h1>Boxes with color</h1>
+                    <div className = 'box'>
+                      <Boxes boxes={boxes} />
+                    </div>
+                </div>
+                </div>
+            )
+            }
+
+            const rootElement = document.getElementById('root')
+            ReactDOM.render(<App />, rootElement)
+      </script>
+  </body>
+</html>
+
